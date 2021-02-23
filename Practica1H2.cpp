@@ -9,7 +9,16 @@ int main()
     int a, b, c, ex, i;
     std::cout << "Ingrese una opción" << std::endl
               << "1) suma de 2 vectores aleatorios en un tercer vector" << std::endl
-              << "2)Llenar un vector de N elementos, imprimir la posición y el valor del elemento mayor almacenado en el vector. Suponga que todos los elementos del vector son diferentes." << std::endl;
+              << "2)Llenar un vector de N elementos, imprimir la posición y el valor del elemento mayor almacenado en el vector. Suponga que todos los elementos del vector son diferentes." << std::endl
+              << "3)Almacenar N números en un vector, elevar al cuadrado cada valor almacenado en el vector, almacenar el resultado en otro vector. Imprimir el vector original y el vector resultante." << std::endl
+              << "4)Almacenar N números en un vector, imprimir cuantos son ceros, cuantos son negativos, cuantos positivos. Imprimir además la suma de los negativos y la suma de los positivos." << std::endl
+              << "5)Almacenar N números en un vector, almacenarlos en otro vector en orden inverso al vector original e imprimir el vector resultante." << std::endl
+              << "6)Se tienen almacenados en la memoria dos vectores A y B de N elementos cada uno. Hacer un algoritmo que escriba la palabra “Iguales” si ambos vectores son iguales y “Diferentes” si no lo son. Serán iguales cuando en la misma posición de ambos vectores se tenga el mismo valor para todos los elementos." << std::endl
+              << "7)Se tiene el vector A con N elementos almacenados. Diseñe un algoritmo que escriba “SI” si el vector está ordenado ascendentemente o “NO” si el vector no está ordenado." << std::endl
+              << "8)Diseñe un algoritmo que lea un número cualquiera y lo busque en el vector V, el cual tiene almacenados N elementos. Escribir la posición donde se encuentra almacenado el número en el vector o el mensaje “NO” si no lo encuentra. Búsqueda secuencial." << std::endl
+              << "9)Diseñe un algoritmo que lea dos vectores A y B de N elementos cada uno y multiplique el primer elemento de A con el último elemento de B y luego el segundo elemento de A por el N-1 elemento de B y así sucesivamente hasta llegar al N elemento de A por el primer elemento de B. El resultado de la multiplicación almacenarlo en un vector C." << std::endl
+              << "10)Dado un vector A de N elementos, hallar:" << std::endl << "a.  La suma de los números pares" << std::endl << "b.	La suma de los números impares" << std::endl << "c.	La suma de los números primos" << std::endl << "d.	La cantidad de números pares, impares y primos." << std::endl;
+
     std::cin >> ex;
     switch (ex)
     {
@@ -157,30 +166,35 @@ int main()
     {
         std::cout << "Ingrese el tamaño del vector :";
         std::cin >> a;
-        std::vector<int> v1; //usando vector
+        std::vector<int> v1;
         srand(time(0));
+        std::cout << "Generando vector aleatorio con valores: 1-100" << std::endl;
         for (i = 0; i < a; i++)
         {
-            v1[i] = rand()% 100 + 1 ;
+            v1.push_back(rand()% 100 + 1);
+            std::cout << v1[i] << " ";
         }
-        int cheq = rand()%2+1;
+        int cheq = rand() % 2 + 1;
         if (cheq==1)
         {
             std::sort(std::begin(v1), std::end(v1));
         }
+        std::cout << "Randomizando si ordenar o no..." << std::endl;//
         //aquí comienza el algoritmo para chequear si está ordenado de forma ascendente
         c = v1[0];
         int z = 0;
         for (i = 0; i < a; i++)
         {
-            b = v1[i+1];            
-            if (b > c)
+            std::cout << v1[i] << " ";
+            b = v1[i];            
+            if (b >= c)
             {
                 z = 1;
             }
             else
             {
                 z = 0;
+                break;
             }
         }
         if (z == 1)
@@ -191,7 +205,7 @@ int main()
         {
             std::cout << "NO está ordenado de manera ascendente." << std::endl;
         }
-        break;
+        break;    
     }
     default:
         std::cout << "Ingrese una opción correcta";
