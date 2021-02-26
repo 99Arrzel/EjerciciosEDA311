@@ -3,11 +3,21 @@
 #include <math.h>
 #include <time.h>
 #include <algorithm>
-
-int main()
+#include <conio.h>
+//hacer menú para generar los vectores y no repetir, hacerlo en una clase
+void limpiar()
 {
-    int a, b, c, ex, i;
+    
+    int n;
+    for (n = 0; n < 10; n++)
+        printf( "\n\n\n\n\n\n\n\n\n\n" );
+}
+void menu()
+{
+    
+    limpiar();
     std::cout << "Ingrese una opción" << std::endl
+              << "0) salir." << std::endl
               << "1) suma de 2 vectores aleatorios en un tercer vector" << std::endl
               << "2)Llenar un vector de N elementos, imprimir la posición y el valor del elemento mayor almacenado en el vector. Suponga que todos los elementos del vector son diferentes." << std::endl
               << "3)Almacenar N números en un vector, elevar al cuadrado cada valor almacenado en el vector, almacenar el resultado en otro vector. Imprimir el vector original y el vector resultante." << std::endl
@@ -22,256 +32,276 @@ int main()
               << "b.	La suma de los números impares" << std::endl
               << "c.	La suma de los números primos" << std::endl
               << "d.	La cantidad de números pares, impares y primos." << std::endl;
+}
 
-    std::cin >> ex;
-    switch (ex)
+int main()
+{
+    int a, b, c, ex = 0, i;
+    do
     {
-    case 1:
-    {
-        std::cout << "Ingrese el tamaño de los vectores A y B: ";
-        std::cin >> a;
-        int *v1 = new int[a];
-        int *v2 = new int[a];
-        int *v3 = new int[a];
-        for (i = 0; i < a; i++)
+        menu();
+        std::cin >> ex;
+        switch (ex)
         {
-            v1[i] = rand() % 99 + 1;
-            std::cout << "V1 = " << v1[i];
-            v2[i] = rand() % 30 + 10;
-            std::cout << ", V2 = " << v2[i];
-            v3[i] = v1[i] + v2[i];
-            std::cout << " : V3 = " << v3[i] << std::endl;
-        }
-        break;
-    }
-    case 2:
-    {
-        std::cout << "Ingrese el tamaño del vector : ";
-        std::cin >> a;
-        int *v1 = new int[a];
-        for (i = 0; i < a; i++)
-        {
-            v1[i] = rand() % 200 + 10;
-            std::cout << i << " : " << v1[i] << std::endl;
-        }
-        b = 0;
-        int contador = 0;
-        for (i = 0; i < a; i++)
-        {
-            c = v1[i];
-            if (c > b)
-            {
-                b = c;
-                contador = i;
-            }
-        }
-        std::cout << std::endl;
-        std::cout << "número más alto en la posición : " << contador << " con valor de : " << b;
-        break;
-    }
-    break;
-    case 3:
-    {
-        std::cout << "Ingrese el tamaño del vector : ";
-        std::cin >> a;
-        double *v1 = new double[a];
-        double *v2 = new double[a];
-        std::cout << "Num : Sqrt" << std::endl;
-        for (i = 0; i < a; i++)
-        {
-            v1[i] = rand() % 100 + 10;
-            std::cout << v1[i];
-            v2[i] = sqrt(v1[i]);
-            std::cout << " : " << v2[i] << std::endl;
-        }
-        break;
-    }
-    case 4:
-    {
-        srand(time(0));
-        std::cout << "Ingrese el tamaño del vector : ";
-        std::cin >> a;
-        int *v1 = new int[a];
-        int nega = 0, posi = 0, cero = 0;
-        int sumanega = 0, sumaposi = 0;
 
-        for (i = 0; i < a; i++)
+        case 1:
         {
-            v1[i] = (rand() % +201) - 100;
-            std::cout << v1[i] << " : ";
-            if (v1[i] == 0)
-                cero++;
-            if (v1[i] > 0)
+            std::cout << "Ingrese el tamaño de los vectores A y B: ";
+            std::cin >> a;
+            int *v1 = new int[a];
+            int *v2 = new int[a];
+            int *v3 = new int[a];
+            for (i = 0; i < a; i++)
             {
-                posi++;
-                sumaposi = sumaposi + v1[i];
+                v1[i] = rand() % 99 + 1;
+                std::cout << "V1 = " << v1[i];
+                v2[i] = rand() % 30 + 10;
+                std::cout << ", V2 = " << v2[i];
+                v3[i] = v1[i] + v2[i];
+                std::cout << " : V3 = " << v3[i] << std::endl;
             }
-            if (v1[i] < 0)
+            getch();
+        }
+        break;
+
+        case 2:
+        {
+            std::cout << "Ingrese el tamaño del vector : ";
+            std::cin >> a;
+            int *v1 = new int[a];
+            for (i = 0; i < a; i++)
             {
-                nega++;
-                sumanega = sumanega + v1[i];
+                v1[i] = rand() % 200 + 10;
+                std::cout << i << " : " << v1[i] << std::endl;
             }
-        }
-        std::cout << std::endl
-                  << "Hay " << cero << " cero(s), " << posi << " positivos y " << nega << " negativos" << std::endl;
-        std::cout << "La suma de positivos es: " << sumaposi << " y la suma de negativos es : " << sumanega << std::endl;
-        break;
-    }
-    case 5:
-    {
-        std::cout << "Ingrese el tamaño del vector" << std::endl;
-        std::cin >> a;
-        int *v1 = new int[a];
-        int *v2 = new int[a];
-        srand(time(0));
-        std::cout << "Este es el vector aleatorio de " << a << " números" << std::endl;
-        for (i = 0; i < a; i++)
-        {
-            v1[i] = rand() % 100 + 1;
-            std::cout << v1[i] << " ";
-        }
-        std::cout << std::endl
-                  << "Este es el vector inverso " << std::endl;
-        int cont = 0;
-        for (i = a - 1; i > -1; i--)
-        {
-            v2[cont] = v1[i];
-            cont++;
-        }
-        for (i = 0; i < a; i++)
-        {
-            std::cout << v2[i] << " ";
-        }
-        std::cout << std::endl;
-        break;
-    }
-    case 6:
-    {
-        std::cout << "Ingrese el tamaño del vector " << std::endl;
-        std::cin >> a;
-        int *v1 = new int[a];
-        int *v2 = new int[a];
-        srand(time(0));
-        for (i = 0; i < a; i++)
-        {
-            v1[i] = rand() % 10 + 1;
-            v2[i] = rand() % 10 + 1;
-            if (v1[i] == v2[i])
+            b = 0;
+            int contador = 0;
+            for (i = 0; i < a; i++)
             {
-                std::cout << "Posición Nº : " << i << " : " << v1[i] << "-" << v2[i] << " : SON IGUALES" << std::endl;
+                c = v1[i];
+                if (c > b)
+                {
+                    b = c;
+                    contador = i;
+                }
+            }
+            std::cout << std::endl;
+            std::cout << "número más alto en la posición : " << contador << " con valor de : " << b;
+            getch();
+            break;
+        }
+
+        case 3:
+        {
+            std::cout << "Ingrese el tamaño del vector : ";
+            std::cin >> a;
+            double *v1 = new double[a];
+            double *v2 = new double[a];
+            std::cout << "Num : Sqrt" << std::endl;
+            for (i = 0; i < a; i++)
+            {
+                v1[i] = rand() % 100 + 10;
+                std::cout << v1[i];
+                v2[i] = sqrt(v1[i]);
+                std::cout << " : " << v2[i] << std::endl;
+            }
+            getch();
+            break;
+        }
+        case 4:
+        {
+            srand(time(0));
+            std::cout << "Ingrese el tamaño del vector : ";
+            std::cin >> a;
+            int *v1 = new int[a];
+            int nega = 0, posi = 0, cero = 0;
+            int sumanega = 0, sumaposi = 0;
+
+            for (i = 0; i < a; i++)
+            {
+                v1[i] = (rand() % +201) - 100;
+                std::cout << v1[i] << " : ";
+                if (v1[i] == 0)
+                    cero++;
+                if (v1[i] > 0)
+                {
+                    posi++;
+                    sumaposi = sumaposi + v1[i];
+                }
+                if (v1[i] < 0)
+                {
+                    nega++;
+                    sumanega = sumanega + v1[i];
+                }
+            }
+            std::cout << std::endl
+                      << "Hay " << cero << " cero(s), " << posi << " positivos y " << nega << " negativos" << std::endl;
+            std::cout << "La suma de positivos es: " << sumaposi << " y la suma de negativos es : " << sumanega << std::endl;
+            getch();
+            break;
+        }
+        case 5:
+        {
+            std::cout << "Ingrese el tamaño del vector" << std::endl;
+            std::cin >> a;
+            int *v1 = new int[a];
+            int *v2 = new int[a];
+            srand(time(0));
+            std::cout << "Este es el vector aleatorio de " << a << " números" << std::endl;
+            for (i = 0; i < a; i++)
+            {
+                v1[i] = rand() % 100 + 1;
+                std::cout << v1[i] << " ";
+            }
+            std::cout << std::endl
+                      << "Este es el vector inverso " << std::endl;
+            int cont = 0;
+            for (i = a - 1; i > -1; i--)
+            {
+                v2[cont] = v1[i];
+                cont++;
+            }
+            for (i = 0; i < a; i++)
+            {
+                std::cout << v2[i] << " ";
+            }
+            std::cout << std::endl;
+            getch();
+            break;
+        }
+        case 6:
+        {
+            std::cout << "Ingrese el tamaño del vector " << std::endl;
+            std::cin >> a;
+            int *v1 = new int[a];
+            int *v2 = new int[a];
+            srand(time(0));
+            for (i = 0; i < a; i++)
+            {
+                v1[i] = rand() % 10 + 1;
+                v2[i] = rand() % 10 + 1;
+                if (v1[i] == v2[i])
+                {
+                    std::cout << "Posición Nº : " << i << " : " << v1[i] << "-" << v2[i] << " : SON IGUALES" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Posición Nº : " << i << " : " << v1[i] << "-" << v2[i] << " : SON DIFERENTES" << std::endl;
+                }
+            }
+            getch();
+            break;
+        }
+        case 7:
+        {
+            std::cout << "Ingrese el tamaño del vector :";
+            std::cin >> a;
+            std::vector<int> v1;
+            srand(time(0));
+            std::cout << "Generando vector aleatorio con valores: 1-100" << std::endl;
+            for (i = 0; i < a; i++)
+            {
+                v1.push_back(rand() % 100 + 1);
+                std::cout << v1[i] << " ";
+            }
+            int cheq = rand() % 2 + 1;
+            if (cheq == 1)
+            {
+                std::sort(std::begin(v1), std::end(v1));
+            }
+            std::cout << "Randomizando si ordenar o no..." << std::endl; //
+            //aquí comienza el algoritmo para chequear si está ordenado de forma ascendente
+            c = v1[0];
+            int z = 0;
+            for (i = 0; i < a; i++)
+            {
+                std::cout << v1[i] << " ";
+                b = v1[i];
+                if (b >= c)
+                {
+                    z = 1;
+                }
+                else
+                {
+                    z = 0;
+                    break;
+                }
+            }
+            if (z == 1)
+            {
+                std::cout << "Está ordenado de manera ascendente." << std::endl;
             }
             else
             {
-                std::cout << "Posición Nº : " << i << " : " << v1[i] << "-" << v2[i] << " : SON DIFERENTES" << std::endl;
+                std::cout << "NO está ordenado de manera ascendente." << std::endl;
             }
+            getch();
+            break;
         }
-        break;
-    }
-    case 7:
-    {
-        std::cout << "Ingrese el tamaño del vector :";
-        std::cin >> a;
-        std::vector<int> v1;
-        srand(time(0));
-        std::cout << "Generando vector aleatorio con valores: 1-100" << std::endl;
-        for (i = 0; i < a; i++)
+        case 8:
         {
-            v1.push_back(rand() % 100 + 1);
-            std::cout << v1[i] << " ";
-        }
-        int cheq = rand() % 2 + 1;
-        if (cheq == 1)
-        {
-            std::sort(std::begin(v1), std::end(v1));
-        }
-        std::cout << "Randomizando si ordenar o no..." << std::endl; //
-        //aquí comienza el algoritmo para chequear si está ordenado de forma ascendente
-        c = v1[0];
-        int z = 0;
-        for (i = 0; i < a; i++)
-        {
-            std::cout << v1[i] << " ";
-            b = v1[i];
-            if (b >= c)
+            std::cout << "Ingrese el tamaño del vector" << std::endl;
+            std::cin >> a;
+            std::vector<int> v1;
+            for (i = 0; i < a; i++)
             {
-                z = 1;
+                v1.push_back(rand() % (100+1) - 1);
             }
-            else
+            std::cout << "Generando números aleatorios de 1 al 100..." << std::endl
+                      << "Ingrese un número del 1 al 100 para ver si se genero de manera aleatoria en el vector." << std::endl;
+            int val;
+            std::cin >> val;
+            std::cout << "Mostrando los números generados aleatoriamente." << std::endl;
+            for (auto l : v1)
             {
-                z = 0;
-                break;
+                std::cout << l << " ";
             }
-        }
-        if (z == 1)
-        {
-            std::cout << "Está ordenado de manera ascendente." << std::endl;
-        }
-        else
-        {
-            std::cout << "NO está ordenado de manera ascendente." << std::endl;
-        }
-        break;
-    }
-    case 8:
-    {
-        std::cout << "Ingrese el tamaño del vector" << std::endl;
-        std::cin >> a;
-        std::vector<int> v1;
-        for (i = 0; i < a; i++)
-        {
-            v1.push_back(rand() % 100 - 1);
-        }
-        std::cout << "Generando números aleatorios de 1 al 100..." << std::endl
-                  << "Ingrese un número del 1 al 100 para ver si se genero de manera aleatoria en el vector." << std::endl;
-        int val;
-        std::cin >> val;
-        std::cout << "Mostrando los números generados aleatoriamente." << std::endl;
-        for (auto l : v1)
-        {
-            std::cout << l << " ";
-        }
-        std::cout << std::endl;
-        for (i = 0; i < v1.size(); i++)
-        {
-            if (v1[i] == val)
+            std::cout << std::endl;
+            for (i = 0; i < v1.size(); i++)
             {
-                std::cout << "Se encontró el número en la posición " << i << std::endl;
-                break;
+                if (v1[i] == val)
+                {
+                    std::cout << "Se encontró el número en la posición " << i << std::endl;
+                    break;
+                }
+                else
+                {
+                    std::cout << "No se encontró el número en la posición :" << i << std::endl;
+                }
             }
-            else
+            getch();
+            break;
+        }
+        case 9:
+        {
+            std::cout << "Ingrese el tamaño de los vectores" << std::endl;
+            std::cin >> a;
+            std::vector<int> v1, v2, v3;
+            srand(time(0));
+            std::cout << "Generando dos vectores aleatorios..." << std::endl;
+            for (i = 0; i < a; i++)
             {
-                std::cout << "No se encontró el número en la posición :" << i << std::endl;
+                v1.push_back(rand() % (100+1) - 1);
+                std::cout << "v1 posición :" << i << " valor :" << v1[i] << "    ";
+                v2.push_back(rand() % 100 - 1);
+                std::cout << "v2 :" << i << " valor :" << v2[i] << std::endl;
             }
+            std::cout << "Multiplicando los vectores..." << std::endl;
+            for (i = 0; i < a; i++)
+            {
+                v3.push_back(v1[i] * v2[a - i - 1]);
+                std::cout << "v3 posición :" << i << " valor :" << v3[i] << std::endl;
+            }
+            getch();
+            break;
         }
-    }
-    case 9:
-    {
-        std::cout << "Ingrese el tamaño de los vectores" << std::endl;
-        std::cin >> a;
-        std::vector<int> v1, v2, v3;
-        srand(time(0));
-        std::cout << "Generando dos vectores aleatorios..." << std::endl;
-        for (i = 0; i < a; i++)
+        case 10:
         {
-            v1.push_back(rand() % 100 - 1);
-            std::cout << "v1 posición :" << i << " valor :" << v1[i] << "    ";
-            v2.push_back(rand() % 100 - 1);
-            std::cout << "v2 :" << i << " valor :" << v2[i] << std::endl;
         }
-        std::cout << "Multiplicando los vectores..." << std::endl;
-        for (i = 0; i < a; i++)
-        {
-            v3.push_back(v1[i] * v2[a - i - 1]);
-            std::cout << "v3 posición :" << i << " valor :" << v3[i] << std::endl;
+        default:
+            std::cout << "Ingrese una opción correcta";
+            break;
         }
-        break;
-    }
-    case 10:
-    {
-        
-    }
-    default:
-        std::cout << "Ingrese una opción correcta";
-        break;
-    }
+    } while (ex != 0);
+    return 0;
 }
