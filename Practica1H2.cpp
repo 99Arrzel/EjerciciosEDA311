@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <conio.h>
 #define tam 100
-int v1[tam], v2[tam], v3[tam], cantidad, como;
+int v1[tam], v2[tam], v3[tam], v4[tam], cantidad, como, valor;
+double b1[tam];
 void limpiar()
 {
 
@@ -26,7 +27,13 @@ void menu()
               << "5)\tMultiplicar el primer elemento por el último sucesivamente y almacenar en otro vector" << std::endl
               << "6)\tConcatenar 2 vectores y ordenarlos ascendentemente" << std::endl
               << "7)\tRealizar el producto de dos vectores considerando que son de distinta longitud." << std::endl
-              << "8)\tEscribe un programa que defina un vector de números y calcule si existe algún número en el vector cuyo valor equivale a la suma del resto de números del vector." << std::endl;
+              << "8)\tEscribe un programa que defina un vector de números y calcule si existe algún número en el vector cuyo valor equivale a la suma del resto de números del vector." << std::endl
+              << "9)\t Realizar el producto de un vector de notas por un escalar (introducido por teclado). " << std::endl
+              << "10)\tAlmacenar la siguiente serie en un vector de 10 posiciones: 1,1,2,3,5,8,.... (Serie de Fibbonacci)" <<std::endl
+              << "11)\tImprimir la mayor de 10 estaturas entre 1.50 y 1.68 almacenadas en un vector. Indicar en qué posición se encuentra la misma. " << std::endl
+              << "12)\tGenerar un vector de 10 posiciones con valores comprendidos entre 1 y 365. Visualizar aquellos elementos que sean pares." << std::endl
+              << "13)\tGenerar un vector de 50 posiciones con valores comprendidos entre 1 y 10. Visualizar cuantos 1 hay, cuantos 2, cuantos 3, etc. hasta el 10." << std::endl
+              << "14)\tBuscar en un vector de nombres un nombre específico. Indicar si se encuentra o no" << std::endl;
 }
 //Para preguntar si es manual o aleatorio
 
@@ -73,7 +80,6 @@ void llenarArray(int *array, int cantidad, int como)
             std::cin >> rini;
             std::cout << "Ingrese el rango aleatorio final" << std::endl;
             std::cin >> rend;
-            rend++;
             srand(time(0));
             for (int i = 0; i < cantidad; i++)
             {
@@ -130,7 +136,7 @@ int main()
             getch();
             break;
         }
-        case 3:
+        case 3: //5 del documento
         {
             std::cout << "Ingrese el tamaño del vector" << std::endl;
             std::cin >> cantidad;
@@ -149,7 +155,7 @@ int main()
             getch();
             break;
         }
-        case 4:
+        case 4: //7 del documento
         {
             std::cout << "Ingrese el tamaño del vector" << std::endl;
             std::cin >> cantidad;
@@ -182,7 +188,7 @@ int main()
             getch();
             break;
         }
-        case 5:
+        case 5: // 9 del documento
         {
             std::cout << "Ingrese el tamaño de los vectores" << std::endl;
             std::cin >> cantidad;
@@ -205,7 +211,7 @@ int main()
             getch();
             break;
         }
-        case 6:
+        case 6: //11 del documento
         {
             int cantidad2;
             std::cout << "Ingrese el tamaño del vector A :";
@@ -247,7 +253,7 @@ int main()
             getch();
             break;
         }
-        case 7:
+        case 7://13 del documento
         {
             int cantidad2;
             std::cout << "Ingrese el tamaño del vector A :";
@@ -292,7 +298,7 @@ int main()
             getch();
             break;
         }
-        case 8:
+        case 8://15 del documento
         {
             int suma;
             int encontrado = 0;
@@ -323,8 +329,163 @@ int main()
             getch();
             break;
         }
-        case 9:
+        case 9: //17 del documento
         {
+            int escalar;
+            std::cout << "Introduzca el vector : Posición X" << std::endl;
+            std::cin >> v1[0];
+            std::cout << "Introduzca el vector : Posición Y" << std::endl;
+            std::cin >> v2[0];
+            std::cout << std::endl;
+            std::cout << "Vector en la posición (" << v1[0] << "," << v2[0] << ")" << std::endl;
+            std::cout << "Introduzca el escalar" << std::endl;
+            std::cin >> escalar;
+            v1[1] = v1[0] * escalar;
+            v2[1] = v2[0] * escalar;
+            std::cout << "Vector en la posición (" << v1[1] << "," << v2[1] << ")" << std::endl;
+            getch();
+            break;
+        }
+        case 10: //19 del documentio
+        {
+            int n1 = 0, n2 = 1, ok = 0;
+            for (int i = 0; i <= 10; ++i)
+            {
+                if (i == 1 || i == 2)
+                {
+                    v1[i] = i;
+                    continue;
+                }
+                ok = n1 + n2;
+                n1 = n2;
+                n2 = ok;
+                v1[i] = ok;
+            }
+            std::cout << "Los primeros 10 terminos de la serie de Fibbonacci son: " << std::endl;
+            listar(v1, 10);
+            getch();
+            break;
+        }
+        case 11: //21 del documento
+        {
+            double valordouble;
+            comoLlenar();
+            std::cin >> como;
+            if (como == 1)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    std::cout << "Ingrese " << i + 1 << " de 10 valores" << std::endl;
+                    std::cin >> valordouble;
+                    if (valordouble > 1.50 && valordouble < 1.68)
+                    {
+                        b1[i] = std::round(valordouble * 1000.0) / 1000.0;
+                    }
+                    else
+                    {
+                        getch();
+                        break;
+                    }
+                }
+            }
+            else if (como == 2)
+            {
+                srand(time(NULL));
+                for (int i = 0; i < 10; i++)
+                {
+                    valordouble = 1.50 + rand() / (double)(RAND_MAX) * (1.68 - 1.50);
+                    b1[i] = std::round(valordouble * 1000.0) / 1000.0;
+                }
+            }
+            valordouble = 0.0;
+            int posi;
+            for (int i = 0; i < 10; i++)
+            {
+                std::cout.precision(3);
+                std::cout << "Valor en la posición " << i << " :";
+                std::cout << b1[i] << std::endl;
+                if (b1[i] > valordouble)
+                {
+                    valordouble = b1[i];
+                    posi = i;
+                }
+            }
+            std::cout.precision(3);
+            std::cout << "El valor más grande es " << valordouble << " y se encuentra en la posición : " << posi << std::endl;
+            getch();
+            break;
+        }
+        case 12: //23 del documento
+        {
+            for (i = 0; i < 10; i++)
+            {
+                v1[i] = rand() % 365 + 1;
+            }
+            std::cout << "El vector generado tiene los números: " << std::endl;
+            listar(v1, 10);
+            std::cout << "Los pares son: " << std::endl;
+            for (int i = 0; i < 10; i++)
+            {
+                if (v1[i] % 2 == 0)
+                {
+                    std::cout << v1[i] << " En la posición :" << i << std::endl;
+                }
+            }
+            getch();
+            break;
+        }
+        case 13: // 25 del documento
+        {
+            srand(time(NULL));
+            int contador = 0;
+            for (i = 0; i < 50; i++)
+            {
+                v1[i] = rand() % 10 + 1;
+            }
+            for (i = 1; i < 10; i++)
+            {
+                for(int j = 0; j < 50; j++)
+                {
+                    if (v1[j] == i)
+                    {
+                        contador++;
+                    }
+                }
+                std::cout << "Se han encontrado " << contador << " de " << i <<"s" <<std::endl;
+                contador = 0;
+            }
+            getch();
+            break;
+        }
+        case 14:// 27 del documento
+        {
+            int chequer = 0;
+            std::string nombres[tam];
+            std::string nombre;
+            std::cout << "Ingresar la cantidad de nombres que ingresará" << std::endl;
+            std::cin >> cantidad;
+            for (int i = 0; i < cantidad; i++)
+            {
+                std::cout << "Ingrese el nombre para la posición " << i << std::endl;
+                std::cin >> nombre;
+                nombres[i] = nombre;
+            }
+            std::cout << "Ingrese el nombre para verificar en el array" << std::endl;
+            std::cin >> nombre;
+            for (int i = 0; i < cantidad; i++)
+            {
+                if(nombre == nombres[i])
+                {
+                    std::cout << "Nombre encontrado en la posición " << i << " :" << nombres[i] << std::endl;
+                    chequer++;
+                }
+            }
+            if(chequer == 0)
+            {
+                std::cout << "No se encontró el nombre" << std::endl;
+            }
+            getch();
+            break;
             
         }
         default:
