@@ -24,7 +24,9 @@ void menu()
               << "3)\tInvertir un vector y almacenarlo en otro vector" << std::endl
               << "4)\tVer si el vector está ordenado de manera ascendente" << std::endl
               << "5)\tMultiplicar el primer elemento por el último sucesivamente y almacenar en otro vector" << std::endl
-              << "6)\tConcatenar 2 vectores y ordenarlos ascendentemente" << std::endl;
+              << "6)\tConcatenar 2 vectores y ordenarlos ascendentemente" << std::endl
+              << "7)\tRealizar el producto de dos vectores considerando que son de distinta longitud." << std::endl
+              << "8)\tEscribe un programa que defina un vector de números y calcule si existe algún número en el vector cuyo valor equivale a la suma del resto de números del vector." << std::endl;
 }
 //Para preguntar si es manual o aleatorio
 
@@ -246,6 +248,82 @@ int main()
             break;
         }
         case 7:
+        {
+            int cantidad2;
+            std::cout << "Ingrese el tamaño del vector A :";
+            std::cin >> cantidad;
+            std::cout << "Ingrese el tamaño del vector B :";
+            std::cin >> cantidad2;
+            comoLlenar();
+            std::cin >> como;
+            std::cout << "Para vector A" << std::endl;
+            llenarArray(v1, cantidad, como);
+            std::cout << "Para vector B" << std::endl;
+            llenarArray(v2, cantidad2, como);
+            std::cout << "Vector A" << std::endl;
+            listar(v1, cantidad);
+            std::cout << "Vector B" << std::endl;
+            listar(v2, cantidad2);
+            std::cout << "Vector C" << std::endl;
+            if (cantidad >= cantidad2)
+            {
+                for (int i = 0; i < cantidad2; i++)
+                {
+                    v3[i] = v1[i] * v2[i];
+                }
+                for (int i = cantidad2; i < cantidad; i++)
+                {
+                    v3[i] = v1[i];
+                }
+                listar(v3, cantidad);
+            }
+            else if (cantidad2 > cantidad)
+            {
+                for (int i = 0; i < cantidad; i++)
+                {
+                    v3[i] = v1[i] * v2[i];
+                }
+                for (int i = cantidad; i < cantidad2; i++)
+                {
+                    v3[i] = v2[i];
+                }
+                listar(v3, cantidad2);
+            }
+            getch();
+            break;
+        }
+        case 8:
+        {
+            int suma;
+            int encontrado = 0;
+            std::cout << "Ingrese el tamaño del vector" << std::endl;
+            std::cin >> cantidad;
+            llenarArray(v1, cantidad, 2);
+            listar(v1, cantidad);
+            for (int i = 0; i < cantidad; i++)
+            {
+                suma = 0;
+                for (int j = 0; j < cantidad; j++)
+                {
+                    if (i != j)
+                    {
+                        suma = suma + v1[j];
+                    }
+                }
+                if (v1[i] == suma)
+                {
+                    std::cout << "El valor : " << v1[i] << " en la posición " << i << " Equivale a la suma del resto del vector" << std::endl;
+                    encontrado = 1;
+                }
+            }
+            if (encontrado == 0)
+            {
+                std::cout << "No se halló ningún número que equivalga a la suma de los arrays" << std::endl;
+            }
+            getch();
+            break;
+        }
+        case 9:
         {
             
         }
