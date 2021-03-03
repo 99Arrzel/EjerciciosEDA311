@@ -1,11 +1,10 @@
-#include <iostream>
-#include <vector>
-#include <math.h>
-#include <time.h>
-#include <algorithm>
-#include <conio.h>
-#include <string.h>
-#include <functional> // std::grater
+#include <iostream> // para std::cout y std::cin
+#include <math.h> // para el round()
+#include <time.h> // para rand(time)
+#include <algorithm> // el std::sort()
+#include <conio.h> // para el getch()
+#include <string.h> // para el std::string en nombres
+#include <functional> // std::greater, para el sort
 
 #define tam 100
 int v1[tam], v2[tam], v3[tam], v4[tam], cantidad, como, valor;
