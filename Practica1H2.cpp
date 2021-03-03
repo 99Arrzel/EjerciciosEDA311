@@ -4,6 +4,9 @@
 #include <time.h>
 #include <algorithm>
 #include <conio.h>
+#include <string.h>
+#include <functional> // std::grater
+
 #define tam 100
 int v1[tam], v2[tam], v3[tam], v4[tam], cantidad, como, valor;
 double b1[tam];
@@ -29,11 +32,12 @@ void menu()
               << "7)\tRealizar el producto de dos vectores considerando que son de distinta longitud." << std::endl
               << "8)\tEscribe un programa que defina un vector de números y calcule si existe algún número en el vector cuyo valor equivale a la suma del resto de números del vector." << std::endl
               << "9)\t Realizar el producto de un vector de notas por un escalar (introducido por teclado). " << std::endl
-              << "10)\tAlmacenar la siguiente serie en un vector de 10 posiciones: 1,1,2,3,5,8,.... (Serie de Fibbonacci)" <<std::endl
+              << "10)\tAlmacenar la siguiente serie en un vector de 10 posiciones: 1,1,2,3,5,8,.... (Serie de Fibbonacci)" << std::endl
               << "11)\tImprimir la mayor de 10 estaturas entre 1.50 y 1.68 almacenadas en un vector. Indicar en qué posición se encuentra la misma. " << std::endl
               << "12)\tGenerar un vector de 10 posiciones con valores comprendidos entre 1 y 365. Visualizar aquellos elementos que sean pares." << std::endl
               << "13)\tGenerar un vector de 50 posiciones con valores comprendidos entre 1 y 10. Visualizar cuantos 1 hay, cuantos 2, cuantos 3, etc. hasta el 10." << std::endl
-              << "14)\tBuscar en un vector de nombres un nombre específico. Indicar si se encuentra o no" << std::endl;
+              << "14)\tBuscar en un vector de nombres un nombre específico. Indicar si se encuentra o no" << std::endl
+              << "15)\\Listado de notas" << std::endl;
 }
 //Para preguntar si es manual o aleatorio
 
@@ -52,7 +56,7 @@ void comoLlenar()
               << "2)Aleatorio" << std::endl;
 }
 //Función para llenar el array
-void llenarArray(int *array, int cantidad, int como)
+void llenarArray(int array[], int cantidad, int como)
 {
     if (cantidad > 100)
     {
@@ -87,6 +91,128 @@ void llenarArray(int *array, int cantidad, int como)
             }
         }
     }
+}
+//Podría usar un vector bidimensional, o quizá usar std::vector, pero el tema es arrays unidimensionales estaticos...
+void listarXNombre(std::string nombres[], int v1[], int v2[], int v3[], int cantidad)
+{
+    char chec, abece[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int counter = 0, v11[tam], v22[tam], v33[tam];
+    std::string rnombres[tam];
+    //size_t tama = strlen(abece);
+    for (int i = 0; i < 27; i++)
+    {
+        //std::cout << "Loop i : "<< i << std::endl;
+        for (int j = 0; j < cantidad; ++j)
+        {
+            //std::cout << "Loop j : " << j << std::endl;
+            chec = nombres[j].at(0);
+            //std::cout << "Letra actual : " << chec << std::endl;
+            //std::cout << "Comparando con letra : " << abece[i] << std::endl;
+            chec = toupper(chec); // por si escriben el nombre con minuscula
+            //std::cout << "Counter = " << counter <<std::endl;
+            if (chec == abece[i] && rnombres[counter].empty())
+            {
+
+                rnombres[counter] = nombres[j];
+                //std::cout << "Nombres :" << rnombres[counter] << "el counter es : " << counter <<std::endl;
+                v11[counter] = v1[j];
+                v22[counter] = v2[j];
+                v33[counter] = v3[j];
+                counter++;
+                if (counter == cantidad)
+                    break;
+            }
+        }
+    }
+    std::cout << "Nombre \t Nota 1 \t Nota 2 \t Promedio" << std::endl;
+    for (int j = 0; j < cantidad; j++)
+    {
+        std::cout << rnombres[j] << "\t  ";
+        std::cout << v11[j] << "\t\t   ";
+        std::cout << v22[j] << "\t\t   ";
+        std::cout << v33[j];
+        std::cout << std::endl;
+    }
+}
+//que feo hacerlo con arrays unidimensionales ZzZzZzZzZz
+void listarXNota(std::string nombres[], int v1[], int v2[], int v3[], int cantidad)
+{
+    int counter = 0, v11[tam], v22[tam], v33[tam], index[tam];
+    std::string rnombres[tam];
+    for (int i = 0; i < cantidad; i++)
+    {
+        v33[i] = v3[i];
+        index[i] = v33[i] * v1[i] * v2[i];
+        //std::cout << " index = "<< index[i] << " " << std::endl;
+        //std::cout << " v33 = "<< v33[i] << " " << std::endl;
+    }
+    // mezclado
+    std::sort(v33, v33 + cantidad, std::greater<int>());
+    counter = 0;
+    int comparador;
+    for (int i = 0; i < cantidad; i++)
+    {
+        for (int j = 0; j < cantidad; j++)
+        {
+            //std::cout << v33[j] << " El valor de v33 i , " << v1[j] << " El valor de v1"<< std::endl;
+            comparador = v33[i] * v1[j] * v2[j];
+            //std::cout << " el index es: " << index[j] << " y se compara con " << comparador << std::endl;
+            if (index[j] == comparador)
+            {
+                v11[counter] = v1[j];
+                v22[counter] = v2[j];
+                rnombres[counter] = nombres[j];
+                //std::cout << "El counter es : " << counter << std::endl;
+                counter++;
+            }
+        }
+    }
+    std::cout << "Nombre \t Nota 1 \t Nota 2 \t Promedio" << std::endl;
+    for (int j = 0; j < cantidad; j++)
+    {
+        std::cout << rnombres[j] << "\t  ";
+        std::cout << v11[j] << "\t\t   ";
+        std::cout << v22[j] << "\t\t   ";
+        std::cout << v33[j];
+        std::cout << std::endl;
+    }
+}
+
+void notasFinales(std::string nombres[], int v3[], int cantidad)
+{
+    int masbajo = v3[0], masalto = v3[0], indexbajo = 0, indexalto = 0;
+    for (int i = 0; i < cantidad; i++)
+    {
+        if (v3[i] > masalto)
+        {
+            masalto = v3[i];
+            indexalto = i;
+        }
+        if (v3[i] < masbajo)
+        {
+            masbajo = v3[i];
+            indexbajo = i;
+        }
+    }
+    std::cout << "La nota más alta la tiene " << nombres[indexalto] << " con " << masalto << " puntos" << std::endl;
+    std::cout << "La nota más baja la tiene " << nombres[indexbajo] << " con " << masbajo << " puntos" << std::endl;
+}
+void promedios(int v3[], int cantidad)
+{
+    int prom = 0;
+    for (int i = 0; i < cantidad; i++)
+    {
+        prom = prom + v3[i];
+    }
+    prom = prom / cantidad;
+    std::cout << "El promedio del curso es : " << prom << std::endl;
+}
+
+void menu15()
+{
+    std::cout << "0)Salir" << std::endl
+              << "1)Listar ordenando nombres" << std::endl
+              << "2)Listar ordenado por nota final" << std::endl;
 }
 
 int main()
@@ -253,7 +379,7 @@ int main()
             getch();
             break;
         }
-        case 7://13 del documento
+        case 7: //13 del documento
         {
             int cantidad2;
             std::cout << "Ingrese el tamaño del vector A :";
@@ -298,7 +424,7 @@ int main()
             getch();
             break;
         }
-        case 8://15 del documento
+        case 8: //15 del documento
         {
             int suma;
             int encontrado = 0;
@@ -444,20 +570,20 @@ int main()
             }
             for (i = 1; i < 10; i++)
             {
-                for(int j = 0; j < 50; j++)
+                for (int j = 0; j < 50; j++)
                 {
                     if (v1[j] == i)
                     {
                         contador++;
                     }
                 }
-                std::cout << "Se han encontrado " << contador << " de " << i <<"s" <<std::endl;
+                std::cout << "Se han encontrado " << contador << " de " << i << "s" << std::endl;
                 contador = 0;
             }
             getch();
             break;
         }
-        case 14:// 27 del documento
+        case 14: // 27 del documento
         {
             int chequer = 0;
             std::string nombres[tam];
@@ -474,19 +600,69 @@ int main()
             std::cin >> nombre;
             for (int i = 0; i < cantidad; i++)
             {
-                if(nombre == nombres[i])
+                if (nombre == nombres[i])
                 {
                     std::cout << "Nombre encontrado en la posición " << i << " :" << nombres[i] << std::endl;
                     chequer++;
                 }
             }
-            if(chequer == 0)
+            if (chequer == 0)
             {
                 std::cout << "No se encontró el nombre" << std::endl;
             }
             getch();
             break;
-            
+        }
+        case 15:
+        {
+            std::cout << "Establecer la cantidad de alumnos: ";
+            std::cin >> cantidad;
+            std::cout << std::endl;
+            std::string nombre, nombres[tam];
+            for (i = 0; i < cantidad; i++)
+            {
+                std::cout << "Introduzca el nombre del alumno " << i + 1 << std::endl;
+                std::cin >> nombre;
+                nombres[i] = nombre;
+                limpiar();
+                std::cout << "Introduzca la nota DEL PARCIAL 1 para el alumno [" << nombre << "]" << std::endl;
+                std::cin >> a;
+                v1[i] = a;
+                limpiar();
+                std::cout << "Introduzca la nota DEL PARCIAL 2 para el alumno [" << nombre << "]" << std::endl;
+                std::cin >> a;
+                v2[i] = a;
+                v3[i] = (v1[i] + v2[i]) / 2;
+                limpiar();
+            }
+            int otp;
+            do
+            {
+                limpiar();
+                menu15();
+                std::cin >> otp;
+                switch (otp)
+                {
+                case 1:
+                {
+                    listarXNombre(nombres, v1, v2, v3, cantidad);
+                    notasFinales(nombres, v3, cantidad);
+                    getch();
+                    break;
+                }
+                case 2:
+                {
+                    listarXNota(nombres, v1, v2, v3, cantidad);
+                    notasFinales(nombres, v3, cantidad);
+                    getch();
+                    break;
+                }
+                default:
+                    break;
+                }
+
+            } while (otp != 0);
+            break;
         }
         default:
             std::cout << "Ingrese una opción correcta";
