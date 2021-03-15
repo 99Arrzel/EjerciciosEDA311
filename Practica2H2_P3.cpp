@@ -278,6 +278,9 @@ int main()
         case 3:
         {
             
+            double numerodoub = 0;
+            int nose = 10;
+            numerodoub = nose * 100;
             getch();
             break;
         }
