@@ -12,7 +12,8 @@ void menu()
               << "1)Generar un cuadradro magico" << std::endl
               << "2)Generar las siguientes matrices" << std::endl
               << "3)Calcular la producción de leche semanal de N vacas" << std::endl
-              << "4)Generar otras matrices..." << std::endl;
+              << "4)Generar otras matrices..." << std::endl
+              << "5)Suma de matrices de diferentes tamaños" << std::endl;
 }
 
 void generarCuadro(int n)
