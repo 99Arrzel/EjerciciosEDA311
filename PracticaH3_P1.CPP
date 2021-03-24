@@ -340,6 +340,24 @@ void gotoXY(int x, int y)
     CursorPosition.Y = y;
     SetConsoleCursorPosition(console, CursorPosition);
 }
+void sacarVocales()
+{
+    ingresaFrase();
+    char probar;
+    std::string vocales = "aeiou", nuevapalabra;
+    for (int i = 0; i < frase.length(); i++)
+    {
+        probar = tolower(frase[i]);
+        for (int j = 0; j < vocales.length(); j++)
+        {
+            if (probar == vocales[j])
+            {
+                nuevapalabra.push_back(probar);
+            }
+        }
+    }
+    std::cout << nuevapalabra;
+}
 
 void endCase()
 {
@@ -366,7 +384,8 @@ void listaPractica()
               << "12)Ingresa una frase por teclado y cuenta el número de vocales que contiene" << std::endl
               << "13)Muestra los intentos para lograr que una palabra ingresada por teclado sea igual a una palabra clave (clave de acceso). La comparación debe hacerse con mayúsculas" << std::endl
               << "14)Ingresar tres nombres por teclado en mayúsculas. ordenarlos en forma ascendente." << std::endl
-              << "15)Ingresa una palabra. Haz que esta palabra se mueva de izquierda a derecha en la pantalla y viceversa. Luego que baje y suba." << std::endl;
+              << "15)Ingresa una palabra. Haz que esta palabra se mueva de izquierda a derecha en la pantalla y viceversa. Luego que baje y suba." << std::endl
+              << "16)Sacar vocales y almacenar en otra string" << std::endl;
 }
 
 int main()
@@ -466,6 +485,12 @@ int main()
         {
             limpiar();
             moverPalabraPantalla();
+            endCase();
+            break;
+        }
+        case 16:
+        {
+            sacarVocales();
             endCase();
             break;
         }
