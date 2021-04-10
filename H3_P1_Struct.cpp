@@ -485,6 +485,7 @@ void desarrollo15()
     }
     do
     {
+        std::cout << "0)Salir\n";
         std::cout << "1)Mostrar la lista\n";
         std::cout << "2)Mostrar la lista con personas de cierta edad\n";
         std::cout << "3)Mostrar los usuarios con una inicial\n";
