@@ -33,6 +33,11 @@ void mensaje()
    cout << "Ingrese el mensaje" << std::endl;
    std::cin.ignore();
    std::getline(std::cin, m1);
+   if (m1.size() % 2 != 0)
+   {
+      m1.push_back(' ');
+      m1.push_back(' ');
+   }
    //
 }
 /*----OBTENERPASSWORD----, la función llama a getline para obtener el valor del PASSWORD, además, obtiene su valor int de la suma de sus valores ASCII y se multiplica por si mismo*/
@@ -67,7 +72,7 @@ void encriptado()
             v[i][j] = ((int(m1[contador])));
             contador++;
          }
-         cout << v[i][j] << "\t\t";
+         cout << v[i][j] << "\t\t" << j;
       }
       cout << std::endl;
       cout << std::endl;
@@ -124,7 +129,6 @@ void encriptado()
    /*Establecemos si nuestra raiz fue irracional o no, con su valor absoluto, para posicionarlo en última o penultima posición, así sabremos el LENGTH de nuestro array que estará en el propio código*/
    if (endvalue2 == abs(endvalue2) && endvalue2 > 5)
    {
-      cout << "Absoluto no es endvalue\n";
       endvalue = (sqrt(m1.size()) * 2) - 1; 
    }
    else

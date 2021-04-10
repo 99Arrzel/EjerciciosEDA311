@@ -9,7 +9,6 @@
 
 using std::cout;
 using std::endl;
-
 int opt = 0;
 std::string paulaString;
 std::string abc = "abcdefghijklmnñopqrstuvwxyz", ABC = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
