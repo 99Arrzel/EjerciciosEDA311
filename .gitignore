@@ -2,3 +2,5 @@
 /*.exe
 valor.cpp
 sorteo.cpp
+/*.sql
+Proyecto/modeloV2.sql
