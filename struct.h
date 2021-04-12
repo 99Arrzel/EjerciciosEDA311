@@ -11,7 +11,7 @@ using std::cout;
 
 struct productos //1
 {
-    double pCompra;
+    double pCompraS;
     double pVenta;
     int codigo;
     int cantidad;
