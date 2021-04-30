@@ -3,10 +3,8 @@
 
 int main()
 {
-    int value = 5;
-
-    int *ptr = &value;
-    std::cout << *ptr;
+    if (__cplusplus == 201703L)
+        std::cout << "C++17\n";
     getch();
     return 0;
 }
