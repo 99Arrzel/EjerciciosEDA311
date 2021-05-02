@@ -3,6 +3,7 @@
 #include <cmath>
 #include <algorithm>
 #include <tuple>
+#include <cstring> //size
 ///////////////////GLOBALES
 int opt = 0;
 
@@ -15,6 +16,7 @@ public:            //Todo publico jaja
         std::string string1;
         float float1;
         struct nodillo *sig, *ant;
+        char char1;
     };
     struct nodillo *cab, *fin, *p, *p2; //Declaración de cabecera, final y pointer
     nodillo *returnCab() { return cab; }
@@ -44,6 +46,33 @@ public:            //Todo publico jaja
                 fin->sig = nuevo;
                 fin = nuevo;
                 std::cout << "Nodo registrado\n";
+            }
+        }
+    }
+    void insertarString(std::string a)
+    {
+        struct nodillo *nuevo;
+        nuevo = new struct nodillo;
+        nuevo->sig = NULL;
+        if (nuevo == NULL)
+        {
+            std::cout << "Sin espacio en memoria\n";
+        }
+        else
+        {
+            std::string mensaje = "String registrado\n";
+            nuevo->string1 = a;
+            if (cab == NULL && fin == NULL)
+            {
+                cab = nuevo;
+                fin = nuevo;
+                std::cout << mensaje;
+            }
+            else
+            {
+                fin->sig = nuevo;
+                fin = nuevo;
+                std::cout << mensaje;
             }
         }
     }
@@ -209,7 +238,7 @@ public:            //Todo publico jaja
         auxImpares = imparesCab; //Puntero al inicio igual
         //
         p = a;
-        while (p != NULL)
+        while (p != NULL) //Listamos a
         {
             std::cout << p->entero1 << "  ";
             p = p->sig;
@@ -343,12 +372,12 @@ public:            //Todo publico jaja
     }
     void listarPosicionEnNodoEnteros(int pos)
     {
-        
+
         int contador = 0;
         p = cab;
         while (p != NULL)
         {
-            if (contador == pos-1)
+            if (contador == pos - 1)
             {
                 std::cout << p->entero1 << "  ";
             }
@@ -360,7 +389,158 @@ public:            //Todo publico jaja
             std::cout << "Esa posición no existe, la lista es más pequeña\n";
         }
     }
+    nodillo *buscarStrings(std::string a)
+    {
+        bool encontrado = false;
+        p = cab;
+        while (p != NULL)
+        {
+            if (p->string1 == a)
+            {
+                encontrado = true;
+                break;
+            }
+            p = p->sig;
+        }
+        if (encontrado)
+        {
+            return p;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    int contarNumeroEnLista(int a)
+    {
+        int contador = 0;
+        p = cab;
+        while (p != NULL)
+        {
+            if (p->entero1 == a)
+            {
+                contador++;
+            }
+            p = p->sig;
+        }
+        return contador;
+    }
+    void encontrarInterseccion(nodillo *a, nodillo *b)
+    {
+        std::cout << "\nElementos de intersección\n";
+        bool encontrado = false;
+        auto bb = b;
+        while (a != NULL)
+        {
+            bb = b;
+            while (bb != NULL)
+            {
+                if (a->entero1 == bb->entero1)
+                {
+                    std::cout << a->entero1 << " ";
+                    encontrado = true;
+                }
+                bb = bb->sig;
+            }
+            a = a->sig;
+        }
+        if (encontrado)
+        {
+            std::cout << "\nLa lista tiene elementos de interseccion.\n";
+        }
+        else
+        {
+            std::cout << "\nLa lista no tiene elementos de intersección.\n";
+        }
+    }
+    nodillo *listaPromedioMayor(nodillo *a)
+    {
+        //Recorremos una vez para ver el promedio
+        int sumador = 0, contador = 0;
+        p = a;
+        while (p != NULL)
+        {
+            sumador += p->entero1;
+            contador++;
+            p = p->sig;
+        }
+        int promedio = sumador / contador;
+        nodillo *nuevo;
+        nodillo *auxNuevo = NULL;
+        nuevo = new struct nodillo; //Crear un nuevo nodo
+        auxNuevo = nuevo;
+        p = a; //Retornamos p a 'a';
+        while (p != NULL)
+        {
+            if (p->entero1 > promedio)
+            {
+                auxNuevo->sig = p;
+
+                auxNuevo = auxNuevo->sig;
+            }
+
+            p = p->sig;
+            if (p == NULL)
+            {
+                auxNuevo->sig = NULL;
+                break;
+            }
+        }
+        nuevo = nuevo->sig;
+        if (contador == 0)
+        {
+            std::cout << "0 valores, no se puede promediar\n";
+            return NULL;
+        }
+        else
+        {
+            return nuevo;
+        }
+    }
+    void almacenarStrings(std::string a, std::string b)
+    {
+        std::string c = a + b;
+        ///AE
+        for (int i = 0; i < c.size(); i++)
+        {
+            struct nodillo *nuevo;
+            nuevo = new struct nodillo; //Crear un nuevo nodo
+            nuevo->sig = NULL;          //Siguiente es null
+            if (nuevo == NULL)
+            {
+                std::cout << "No hay espacio en Memoria\n";
+            }
+            else
+            {
+                nuevo->char1 = c[i];             //string para nuevo
+                if (cab == NULL && fin == NULL) //Si la cabecera está vacia y el final está vacio
+                {
+                    cab = nuevo; //Cabecero apunta a nuevo, que es el que acabas de crear
+                    fin = nuevo; //Fin apunta a nuevo
+                }
+                else
+                {
+                    fin->sig = nuevo;
+                    fin = nuevo;
+                }
+            }
+        }
+    }
+    void coutCharSeparadoGuion()
+    {
+        p = cab;
+        while (p != NULL)
+        {
+            std::cout << p->char1;
+            p = p->sig;
+            if (p!=NULL)
+            {
+                std::cout << "-";
+            }
+        }
+    }
     
+
 };
 
 MisNodos::MisNodos()
@@ -401,4 +581,12 @@ void menuPrincipal()
     std::cout << "11)Sumar los nodos de una lista de enteros.\n";
     std::cout << "12)Comparar 2 listas y retornar 1 si son iguales y 0 si no lo son\n";
     std::cout << "13)Seleccionar el n valor de una lista\n";
+    std::cout << "14)Buscar x elemento en una lista(Usaré strings)\n";
+    std::cout << "15)Contar el número de veces que hay un entero en una lista\n";
+    std::cout << "16)Mostrar intersecciones de 2 listas de enteros.\n";
+    std::cout << "17)Es lo mismo que la 5 ZzZzZz\n";
+    std::cout << "18)Dada una lista devolver otra con valores mayores al promedio(No dice que tipo de datos, así que enteros)\n";
+    std::cout << "19)Juntar 2 strings letra por letra en una lista de chars y mostrarla separada con -\n";
+    std::cout << "20)Insertar un dato en una lista enlazada de manera que esté ordenado\n";
+    std::cout << "21)Insertar un dato al final si no es un dato repetido de la lista.\n";
 }

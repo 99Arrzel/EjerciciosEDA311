@@ -289,6 +289,122 @@ void tarea13()
     std::cin >> bpos;
     tarea13.listarPosicionEnNodoEnteros(bpos);
 }
+void tarea14()
+{
+    std::cout << "Inserta 0 para salir\n";
+    MisNodos tarea14;
+    std::string insertar;
+    while (insertar != "0")
+    {
+        std::cout << "Inserta un valor\n";
+        std::cin >> insertar;
+        if (insertar == "0")
+        {
+            break;
+        }
+        tarea14.insertarString(insertar);
+    }
+    std::cout << "\nIngresa un valor para buscar\n";
+    std::cin >> insertar;
+    auto puntero = tarea14.buscarStrings(insertar);
+    if (puntero != NULL)
+    {
+        std::cout << "Elemento en la lista con valor :" << puntero->string1 << "\n";
+    }
+    else
+    {
+        std::cout << "Palabra no encontrada.\n";
+    }
+}
+void tarea15()
+{
+    MisNodos tarea15;
+    int b = 0;
+    do
+    {
+        std::cout << "Introduzca un entero\n";
+        std::cin >> b;
+        if (b != 0)
+        {
+            tarea15.insertarEntero(b);
+        }
+    } while (b != 0);
+    std::cout << "Ingrese el número a buscar en la lista\n";
+    int buscar = 0;
+    std::cin >> buscar;
+    std::cout << "Elemento encontrado :" << tarea15.contarNumeroEnLista(buscar) << " veces\n";
+}
+void tarea16()
+{
+    MisNodos tarea16a;
+    MisNodos tarea16b;
+    int b = 0;
+    do
+    {
+        std::cout << "Introduzca un entero\n";
+        std::cin >> b;
+        if (b != 0)
+        {
+            tarea16a.insertarEntero(b);
+        }
+    } while (b != 0);
+    std::cout << "\nAhora para la segunda lista\n";
+    b = 0;
+    do
+    {
+        std::cout << "Introduzca un entero\n";
+        std::cin >> b;
+        if (b != 0)
+        {
+            tarea16b.insertarEntero(b);
+        }
+    } while (b != 0);
+    auto cabA = tarea16a.returnCab();
+    auto cabB = tarea16b.returnCab();
+    tarea16a.encontrarInterseccion(cabA, cabB);
+}
+void tarea18()
+{
+    MisNodos tarea18;
+    int b = 0;
+    do
+    {
+        std::cout << "Introduzca un entero\n";
+        std::cin >> b;
+        if (b != 0)
+        {
+            tarea18.insertarEntero(b);
+        }
+    } while (b != 0);
+    auto soloMayores = tarea18.listaPromedioMayor(tarea18.returnCab());
+    tarea18.setCab(soloMayores);
+    std::cout << "\nResultado\n";
+    tarea18.listarNodoEnteros();
+    std::cout << "\n---------------\n";
+}
+void tarea19()
+{
+    std::string nombre, apellido;
+    MisNodos tarea19;
+    std::cout << "Ingresa un nombre\n";
+    std::cin >> nombre;
+    std::cout << "Ingresa un apellido\n";
+    std::cin >> apellido;
+    tarea19.almacenarStrings(nombre,apellido);
+    std::cout << "\n Resultado \n";
+    tarea19.coutCharSeparadoGuion();
+    std::cout << "\n";
+
+}
+void tarea20()
+{
+       
+}
+void tarea21()
+{
+
+}
+
 
 int main()
 {
@@ -364,6 +480,47 @@ int main()
             tarea13();
             break;
         }
+        case 14:
+        {
+            tarea14();
+            break;
+        }
+        case 15:
+        {
+            tarea15();
+            break;
+        }
+        case 16:
+        {
+            tarea16();
+            break;
+        }
+        case 17:
+        {
+            tarea5();
+            break;
+        }
+        case 18:
+        {
+            tarea18();
+            break;
+        }
+        case 19:
+        {
+            tarea19();
+            break;
+        }
+        case 20:
+        {
+            tarea20();
+            break;
+        }
+        case 21:
+        {
+            tarea21();
+            break;
+        }
+
         default:
         {
             break;
