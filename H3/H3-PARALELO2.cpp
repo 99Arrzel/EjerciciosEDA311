@@ -546,9 +546,9 @@ void ordenarPorNombre()
         {
             if(p->edad > siguiente->edad) //Comparamos edad
             {
-                nEdad = siguiente->edad;//Guardamos siguiente edad
+                nEdad = siguiente->edad;//Guardamos siguiente edad 1
                 nNombre = siguiente->nombre;
-                siguiente->edad = p->edad; //Asignamos al siguiente la edad del actual
+                siguiente->edad = p->edad; //Asignamos al siguiente la edad del actual 2
                 siguiente->nombre = p->nombre;
                 p->edad = nEdad; //Asignamos la edad guardada del siguiente a la edad actual
                 p->nombre = nNombre;

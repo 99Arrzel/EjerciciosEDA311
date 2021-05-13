@@ -3,7 +3,7 @@
 void limpiar()
 {
     std::cout << "\nPresione una tecla para continuar\n";
-    getch();
+    std::cin.get();
     system("cls");
 }
 
