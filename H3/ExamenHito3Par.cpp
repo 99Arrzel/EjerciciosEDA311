@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include <curses.h>
 #include <vector>
 
 using namespace std;
@@ -10,6 +9,7 @@ struct nodot1 //ejercicio 1
     struct nodot1 *sig;
 };
 struct nodot1 *cab, *fin, *p;
+
 struct seleccion //ejercicio 2
 {
     string pais;
@@ -17,6 +17,25 @@ struct seleccion //ejercicio 2
     string jugador;
     string resultados;
 };
+void selecionfacil()
+{
+    seleccion miSeleccion;
+    std::cout << "\nIngrese el país\n";
+    std::cin >> miSeleccion.pais;
+    std::cout << "\nIngrese el nombre del entrenador\n";
+    std::cin >> miSeleccion.nombreEntrenador;
+    std::cout << "\nIngrese el nombre del jugador\n";
+    cin.ignore();
+    std::getline(std::cin, miSeleccion.jugador);
+    std::cout << "\nIngrese el resultado\n";
+    std::cin >> miSeleccion.resultados;
+
+    std::cout << "El  país es: " << miSeleccion.pais << "\n";
+    std::cout << "El  nombre del entrenador es: " << miSeleccion.nombreEntrenador << "\n";
+    std::cout << "El  nombre de los jugadores es: " << miSeleccion.jugador << "\n";
+    std::cout << "El  resultado es: " << miSeleccion.resultados << "\n";
+}
+
 class EmpresaXEmpleados //Ejercicio 3
 {
     string nombre;
@@ -61,6 +80,13 @@ EmpresaXEmpleados::EmpresaXEmpleados()
     cout << "Ingrese los años de servicio del empleado" << endl;
     cin >> tiempoServicio;
 }
+void menuEMpleados()
+{
+    EmpresaXEmpleados ajsdaa;
+    std::cout <<"El porcentaje de pago del empleado es: " << ajsdaa.porcentajeDePago() << "\n";
+    ajsdaa.listado();
+}
+
 ///////////////////////
 class TrianGod
 {
@@ -190,7 +216,6 @@ void ejercicio4()
         cout << "Ingresa el lado C" << endl;
         cin >> C;
         lista.insertarDatos(A, B, C);
-        system("cls");
     }
     lista.listarTriangulos();
 }
@@ -200,7 +225,13 @@ void listar()
     p = cab;
     while (p != NULL)
     {
+        int a = p->entero1;
         std::cout << p->entero1 << "  ";
+        std::cout << "\n";
+        std::cout << "Decimal: " << p->entero1 - a;
+        std::cout << "\n";
+        std::cout << "Entero: " << a;
+        std::cout << "\n";
         p = p->sig;
     }
 }
@@ -243,8 +274,6 @@ void limpiar()
 {
     cout << endl
          << "Presiones una tecla para continuar" << endl;
-    getch();
-    system("cls");
 }
 
 void vectores()
@@ -254,11 +283,10 @@ void vectores()
     int dato = 0;
     std::cout << "Introduce el tamaño del array\n";
     std::cin >> size;
-    system("cls");
     nArray = NULL;          //A null
     nArray = new int[size]; //Declarando el array de pointers de el dato introducido
     int contador = 0;
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < size; i++)
     {
         std::cout << "\nIntroduzca un dato para el array\n";
         std::cin >> dato;
@@ -267,7 +295,6 @@ void vectores()
             break;
         }
         nArray[i] = dato;
-        system("cls");
         contador++;
     }
     for (int i = 0; i < contador; i++)
@@ -347,6 +374,16 @@ int main()
             cout << endl;
             listar();
             limpiar();
+            break;
+        }
+        case 2:
+        {
+            selecionfacil();
+            break;
+        }
+        case 3:
+        {
+            menuEMpleados();
             break;
         }
         case 4:
